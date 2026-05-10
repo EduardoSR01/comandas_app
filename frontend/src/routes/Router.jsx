@@ -10,8 +10,8 @@ import RestrictedRoute from "./RestrictedRoute";
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const FuncionarioList = lazy(() => import("../pages/FuncionarioList"));
 const FuncionarioForm = lazy(() => import("../pages/FuncionarioForm"));
-//const ClienteList = lazy(() => import("../pages/ClienteList"));
-//const ClienteForm = lazy(() => import("../pages/ClienteForm"));
+const ClienteList = lazy(() => import("../pages/ClienteList"));
+const ClienteForm = lazy(() => import("../pages/ClienteForm"));
 const ProdutoList = lazy(() => import("../pages/ProdutoList"));
 const ProdutoForm = lazy(() => import("../pages/ProdutoForm"));
 const LoginForm = lazy(() => import("../components/forms/LoginForm"));
@@ -45,8 +45,8 @@ const AppRoutes = () => {
                 <Route path="/produto" element={<PrivateRoute><ProdutoForm /></PrivateRoute>} />
                 <Route path="/funcionarios" element={<PrivateRoute><FuncionarioList /></PrivateRoute>} />
                 <Route path="/funcionario" element={<PrivateRoute><FuncionarioForm /></PrivateRoute>} />
-                {/*<Route path="/clientes" element={<PrivateRoute><ClienteList /></PrivateRoute>} />
-                <Route path="/cliente" element={<PrivateRoute><ClienteForm /></PrivateRoute>} />*/}
+                <Route path="/clientes" element={<PrivateRoute><ClienteList /></PrivateRoute>} />
+                <Route path="/cliente" element={<PrivateRoute><ClienteForm /></PrivateRoute>} />
 
                 {/* Rota para páginas não encontradas */}
                 <Route path="*" element={<NotFound />} />

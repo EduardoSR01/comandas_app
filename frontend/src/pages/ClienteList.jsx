@@ -20,26 +20,22 @@ import { useNavigate } from 'react-router-dom';
 import PageLayout from "../components/common/PageLayout";
 import ActionButtons from "../components/common/ActionButtons";
 
-function FuncionarioList() {
+function ClienteList() {
 
     const navigate = useNavigate();
 
-    const funcionarios = [
+    const clientes = [
         {
             id: 1,
-            nome: 'Eduardo',
-            matricula: '2025007',
-            cpf: '115.136.198-10',
-            telefone: '(47) 99947-5649',
-            grupo: 1
+            nome: 'Pedro Silva',
+            cpf: '546.565.111-77',
+            telefone: '(47) 97878-4987'
         },
         {
             id: 2,
-            nome: 'Gabriela',
-            matricula: '2025002',
-            cpf: '286.261.227-92',
-            telefone: '(49) 98866-8458',
-            grupo: 2
+            nome: 'Isabele Oliveira',
+            cpf: '897.877.798-22',
+            telefone: '(21) 98765-4321'
         }
     ];
 
@@ -47,7 +43,7 @@ function FuncionarioList() {
         <Button
             variant="contained"
             color="primary"
-            onClick={() => navigate('/funcionario')}
+            onClick={() => navigate('/cliente')}
             startIcon={<FiberNew />}
             sx={{ fontWeight: 600, px: 2, py: 1 }}
         >
@@ -55,29 +51,23 @@ function FuncionarioList() {
         </Button>
     );
 
-    const handleView = (funcionario) => {
-        console.log("Visualizar funcionário:", funcionario);
+    const handleView = (cliente) => {
+        console.log("Visualizar cliente:", cliente);
     };
 
-    const handleEdit = (funcionario) => {
-        navigate(`/funcionario/${funcionario.id}`);
+    const handleEdit = (cliente) => {
+        navigate(`/cliente/${cliente.id}`);
     };
 
-    const handleDelete = (funcionario) => {
-        console.log("Excluir funcionário:", funcionario);
-    };
-
-    const getGrupo = (grupo) => {
-        return grupo === 1 ? "Administrador" : "Funcionário";
+    const handleDelete = (cliente) => {
+        console.log("Excluir cliente:", cliente);
     };
 
     const columns = [
         { field: 'id', headerName: 'ID' },
         { field: 'nome', headerName: 'Nome' },
-        { field: 'matricula', headerName: 'Matrícula' },
         { field: 'cpf', headerName: 'CPF' },
         { field: 'telefone', headerName: 'Telefone' },
-        { field: 'grupo', headerName: 'Grupo' },
         {
             field: 'actions',
             headerName: 'Ações',
@@ -92,29 +82,23 @@ function FuncionarioList() {
         }
     ];
 
-    const renderDesktopRow = (funcionario) => (
-        <TableRow key={funcionario.id} hover>
+    const renderDesktopRow = (cliente) => (
+        <TableRow key={cliente.id} hover>
 
-            <TableCell>{funcionario.id}</TableCell>
+            <TableCell>
+                {cliente.id}
+            </TableCell>
 
             <TableCell sx={{ fontWeight: 500 }}>
-                {funcionario.nome}
+                {cliente.nome}
             </TableCell>
 
             <TableCell>
-                {funcionario.matricula}
+                {cliente.cpf}
             </TableCell>
 
             <TableCell>
-                {funcionario.cpf}
-            </TableCell>
-
-            <TableCell>
-                {funcionario.telefone}
-            </TableCell>
-
-            <TableCell>
-                {getGrupo(funcionario.grupo)}
+                {cliente.telefone}
             </TableCell>
 
             <TableCell>
@@ -122,15 +106,15 @@ function FuncionarioList() {
                     onView={handleView}
                     onEdit={handleEdit}
                     onDelete={handleDelete}
-                    item={funcionario}
+                    item={cliente}
                 />
             </TableCell>
 
         </TableRow>
     );
 
-    const renderMobileCard = (funcionario) => (
-        <Card key={funcionario.id} sx={{ mb: 2, elevation: 2 }}>
+    const renderMobileCard = (cliente) => (
+        <Card key={cliente.id} sx={{ mb: 2, elevation: 2 }}>
 
             <CardContent sx={{ p: 2 }}>
 
@@ -143,6 +127,7 @@ function FuncionarioList() {
                     }}
                 >
                     <Box>
+
                         <Typography
                             variant="h6"
                             sx={{
@@ -150,15 +135,16 @@ function FuncionarioList() {
                                 fontWeight: 600
                             }}
                         >
-                            {funcionario.nome}
+                            {cliente.nome}
                         </Typography>
 
                         <Typography
                             variant="body2"
                             color="text.secondary"
                         >
-                            ID: {funcionario.id}
+                            ID: {cliente.id}
                         </Typography>
+
                     </Box>
                 </Box>
 
@@ -167,30 +153,24 @@ function FuncionarioList() {
                 <Box sx={{ mb: 2 }}>
 
                     <Typography variant="body2">
-                        <strong>Matrícula:</strong> {funcionario.matricula}
+                        <strong>CPF:</strong> {cliente.cpf}
                     </Typography>
 
                     <Typography variant="body2">
-                        <strong>CPF:</strong> {funcionario.cpf}
-                    </Typography>
-
-                    <Typography variant="body2">
-                        <strong>Telefone:</strong> {funcionario.telefone}
-                    </Typography>
-
-                    <Typography variant="body2">
-                        <strong>Grupo:</strong> {getGrupo(funcionario.grupo)}
+                        <strong>Telefone:</strong> {cliente.telefone}
                     </Typography>
 
                 </Box>
 
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+
                     <ActionButtons
-                        item={funcionario}
+                        item={cliente}
                         onView={handleView}
                         onEdit={handleEdit}
                         onDelete={handleDelete}
                     />
+
                 </Box>
 
             </CardContent>
@@ -199,7 +179,7 @@ function FuncionarioList() {
     );
 
     return (
-        <PageLayout title="Funcionários" actions={actions}>
+        <PageLayout title="Clientes" actions={actions}>
 
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
 
@@ -209,6 +189,7 @@ function FuncionarioList() {
 
                         <TableHead>
                             <TableRow>
+
                                 {columns.map((column, index) => (
                                     <TableCell
                                         key={index}
@@ -217,13 +198,16 @@ function FuncionarioList() {
                                         {column.headerName}
                                     </TableCell>
                                 ))}
+
                             </TableRow>
                         </TableHead>
 
                         <TableBody>
-                            {funcionarios.map((funcionario) =>
-                                renderDesktopRow(funcionario)
+
+                            {clientes.map((cliente) =>
+                                renderDesktopRow(cliente)
                             )}
+
                         </TableBody>
 
                     </Table>
@@ -233,13 +217,15 @@ function FuncionarioList() {
             </Box>
 
             <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                {funcionarios.map((funcionario) =>
-                    renderMobileCard(funcionario)
+
+                {clientes.map((cliente) =>
+                    renderMobileCard(cliente)
                 )}
+
             </Box>
 
         </PageLayout>
     );
 }
 
-export default FuncionarioList;
+export default ClienteList;

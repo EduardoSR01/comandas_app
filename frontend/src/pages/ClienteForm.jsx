@@ -1,11 +1,12 @@
 import { useForm, Controller } from 'react-hook-form';
-import { TextField, Button, Box, MenuItem } from '@mui/material';
+import { TextField, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import PageLayout from "../components/common/PageLayout";
 import { useValidationRules } from '../hooks/useValidationRules';
 
-const FuncionarioForm = () => {
+const ClienteForm = () => {
+
     const {
         control,
         handleSubmit,
@@ -17,15 +18,16 @@ const FuncionarioForm = () => {
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-        console.log("Dados do funcionário:", data);
+        console.log("Dados do cliente:", data);
     };
 
     const handleCancel = () => {
-        navigate('/funcionarios');
+        navigate('/clientes');
     };
 
     return (
-        <PageLayout title="Dados Funcionário">
+        <PageLayout title="Dados Cliente">
+
             <Box component="form" onSubmit={handleSubmit(onSubmit)}>
 
                 <Controller
@@ -41,23 +43,6 @@ const FuncionarioForm = () => {
                             margin="normal"
                             error={!!errors.nome}
                             helperText={errors.nome?.message}
-                        />
-                    )}
-                />
-
-                <Controller
-                    name="matricula"
-                    control={control}
-                    defaultValue=""
-                    rules={{ required: "Matrícula é obrigatória" }}
-                    render={({ field }) => (
-                        <TextField
-                            {...field}
-                            label="Matrícula"
-                            fullWidth
-                            margin="normal"
-                            error={!!errors.matricula}
-                            helperText={errors.matricula?.message}
                         />
                     )}
                 />
@@ -96,58 +81,28 @@ const FuncionarioForm = () => {
                     )}
                 />
 
-                <Controller
-                    name="grupo"
-                    control={control}
-                    defaultValue=""
-                    rules={{ required: "Grupo é obrigatório" }}
-                    render={({ field }) => (
-                        <TextField
-                            {...field}
-                            select
-                            label="Grupo"
-                            fullWidth
-                            margin="normal"
-                            error={!!errors.grupo}
-                            helperText={errors.grupo?.message}
-                        >
-                            <MenuItem value={1}>Administrador</MenuItem>
-                            <MenuItem value={2}>Funcionário</MenuItem>
-                        </TextField>
-                    )}
-                />
-
-                <Controller
-                    name="senha"
-                    control={control}
-                    defaultValue=""
-                    rules={{ required: "Senha é obrigatória" }}
-                    render={({ field }) => (
-                        <TextField
-                            {...field}
-                            type="password"
-                            label="Senha"
-                            fullWidth
-                            margin="normal"
-                            error={!!errors.senha}
-                            helperText={errors.senha?.message}
-                        />
-                    )}
-                />
-
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
-                    <Button sx={{ mr: 1 }} onClick={handleCancel}>
+
+                    <Button
+                        sx={{ mr: 1 }}
+                        onClick={handleCancel}
+                    >
                         Cancelar
                     </Button>
 
-                    <Button type="submit" variant="contained">
+                    <Button
+                        type="submit"
+                        variant="contained"
+                    >
                         Cadastrar
                     </Button>
+
                 </Box>
 
             </Box>
+
         </PageLayout>
     );
 };
 
-export default FuncionarioForm;
+export default ClienteForm;

@@ -113,9 +113,11 @@ const Navbar = () => {
                         ))}
                         <Tooltip title="Perfil" arrow>
                             <IconButton color="inherit">
-                                <Avatar sx={{ width: 32, height: 32, bgcolor: '#f59e0b' }}>
-                                    <AccountCircle />
-                                </Avatar>
+                                <Avatar
+                                    src="/src/assets/Dudu3D.jpg"
+                                    alt="Dudu"
+                                    sx={{ width: 32, height: 32 }}
+                                />
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Sair" arrow>
