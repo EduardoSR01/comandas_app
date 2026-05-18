@@ -1,20 +1,21 @@
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useMasks } from '../hooks/useMasks';
 
 import PageLayout from "../components/common/PageLayout";
 import { useValidationRules } from '../hooks/useValidationRules';
 
 const ClienteForm = () => {
-
     const {
         control,
         handleSubmit,
         formState: { errors }
     } = useForm();
 
+    // Instanciação das funções do hook de máscaras
+    const { applyCpfMask, applyPhoneMask, cleanCpf, cleanPhone } = useMasks();
     const validationRules = useValidationRules();
-
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
@@ -27,7 +28,6 @@ const ClienteForm = () => {
 
     return (
         <PageLayout title="Dados Cliente">
-
             <Box component="form" onSubmit={handleSubmit(onSubmit)}>
 
                 <Controller
@@ -60,6 +60,12 @@ const ClienteForm = () => {
                             margin="normal"
                             error={!!errors.cpf}
                             helperText={errors.cpf?.message}
+                            onChange={(e) => {
+                                const value = cleanCpf(e.target.value);
+                                field.onChange(value);
+                            }}
+                            value={field.value ? applyCpfMask(field.value) : ''}
+                            inputProps={{ maxLength: 14 }}
                         />
                     )}
                 />
@@ -77,30 +83,26 @@ const ClienteForm = () => {
                             margin="normal"
                             error={!!errors.telefone}
                             helperText={errors.telefone?.message}
+                            onChange={(e) => {
+                                const value = cleanPhone(e.target.value);
+                                field.onChange(value);
+                            }}
+                            value={field.value ? applyPhoneMask(field.value) : ''}
+                            inputProps={{ maxLength: 15 }}
                         />
                     )}
                 />
 
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
-
-                    <Button
-                        sx={{ mr: 1 }}
-                        onClick={handleCancel}
-                    >
+                    <Button sx={{ mr: 1 }} onClick={handleCancel}>
                         Cancelar
                     </Button>
-
-                    <Button
-                        type="submit"
-                        variant="contained"
-                    >
+                    <Button type="submit" variant="contained">
                         Cadastrar
                     </Button>
-
                 </Box>
 
             </Box>
-
         </PageLayout>
     );
 };

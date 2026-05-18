@@ -27,13 +27,13 @@ function ClienteList() {
     const clientes = [
         {
             id: 1,
-            nome: 'Pedro Silva',
+            nome: 'Eduardo da Silva Ramos',
             cpf: '546.565.111-77',
             telefone: '(47) 97878-4987'
         },
         {
             id: 2,
-            nome: 'Isabele Oliveira',
+            nome: 'Iago Henrique Schlemper',
             cpf: '897.877.798-22',
             telefone: '(21) 98765-4321'
         }

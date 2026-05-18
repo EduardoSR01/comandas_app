@@ -1,6 +1,7 @@
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Box, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useMasks } from '../hooks/useMasks';
 
 import PageLayout from "../components/common/PageLayout";
 import { useValidationRules } from '../hooks/useValidationRules';
@@ -12,8 +13,9 @@ const FuncionarioForm = () => {
         formState: { errors }
     } = useForm();
 
+    // Instanciação das funções do hook de máscaras
+    const { applyCpfMask, applyPhoneMask, cleanCpf, cleanPhone } = useMasks();
     const validationRules = useValidationRules();
-
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
@@ -75,6 +77,12 @@ const FuncionarioForm = () => {
                             margin="normal"
                             error={!!errors.cpf}
                             helperText={errors.cpf?.message}
+                            onChange={(e) => {
+                                const value = cleanCpf(e.target.value);
+                                field.onChange(value);
+                            }}
+                            value={field.value ? applyCpfMask(field.value) : ''}
+                            inputProps={{ maxLength: 14 }}
                         />
                     )}
                 />
@@ -92,6 +100,12 @@ const FuncionarioForm = () => {
                             margin="normal"
                             error={!!errors.telefone}
                             helperText={errors.telefone?.message}
+                            onChange={(e) => {
+                                const value = cleanPhone(e.target.value);
+                                field.onChange(value);
+                            }}
+                            value={field.value ? applyPhoneMask(field.value) : ''}
+                            inputProps={{ maxLength: 15 }}
                         />
                     )}
                 />
@@ -139,7 +153,6 @@ const FuncionarioForm = () => {
                     <Button sx={{ mr: 1 }} onClick={handleCancel}>
                         Cancelar
                     </Button>
-
                     <Button type="submit" variant="contained">
                         Cadastrar
                     </Button>

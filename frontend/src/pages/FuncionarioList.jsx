@@ -27,7 +27,7 @@ function FuncionarioList() {
     const funcionarios = [
         {
             id: 1,
-            nome: 'Eduardo',
+            nome: 'Eduardo da Silva Ramos',
             matricula: '2025007',
             cpf: '115.136.198-10',
             telefone: '(47) 99947-5649',
@@ -35,7 +35,7 @@ function FuncionarioList() {
         },
         {
             id: 2,
-            nome: 'Gabriela',
+            nome: 'Gabriela Koch',
             matricula: '2025002',
             cpf: '286.261.227-92',
             telefone: '(49) 98866-8458',
