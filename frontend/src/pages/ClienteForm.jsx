@@ -5,6 +5,7 @@ import { useMasks } from '../hooks/useMasks';
 
 import PageLayout from "../components/common/PageLayout";
 import { useValidationRules } from '../hooks/useValidationRules';
+import logoImg from "../assets/Dudu3D.jpg";
 
 const ClienteForm = () => {
     const {
@@ -27,7 +28,18 @@ const ClienteForm = () => {
     };
 
     return (
-        <PageLayout title="Dados Cliente">
+        <PageLayout 
+            title={
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <img 
+                        src={logoImg} 
+                        alt="Logo" 
+                        style={{ width: '50px', height: '50px', borderRadius: '50px', objectFit: 'cover', border: '2px solid #fff' }} 
+                    />
+                    <span>Dados Cliente</span>
+                </Box>
+            }
+        >
             <Box component="form" onSubmit={handleSubmit(onSubmit)}>
 
                 <Controller

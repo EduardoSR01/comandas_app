@@ -4,6 +4,7 @@ import { PhotoCamera as PhotoCameraIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import PageLayout from "../components/common/PageLayout";
 import { useValidationRules } from '../hooks/useValidationRules';
+import logoImg from "../assets/Dudu3D.jpg";
 
 const ProdutoForm = () => {
     const { control, handleSubmit, formState: { errors } } = useForm();
@@ -25,10 +26,19 @@ const ProdutoForm = () => {
         navigate('/produtos');
     };
 
-    // Renderizar o formulário
-    // parte 1 – colar na anterior - Renderizar o formulário
     return (
-        <PageLayout title="Dados Produto">
+        <PageLayout 
+            title={
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <img 
+                        src={logoImg} 
+                        alt="Logo" 
+                        style={{ width: '50px', height: '50px', borderRadius: '50px', objectFit: 'cover', border: '2px solid #fff' }} 
+                    />
+                    <span>Dados Produto</span>
+                </Box>
+            }
+        >
             <Box component="form" onSubmit={handleSubmit(onSubmit)}>
                 <Controller
                     name="nome" control={control} defaultValue=""
@@ -60,7 +70,7 @@ const ProdutoForm = () => {
                     render={({ field }) => (
                         <TextField
                             {...field} label="Valor Unitário" fullWidth margin="normal" type="number"
-                            inputprops={{ step: "0.01", min: "0" }}
+                            inputProps={{ step: "0.01", min: "0" }}
                             error={!!errors.valor_unitario}
                             helperText={errors.valor_unitario?.message}
                         />
@@ -92,7 +102,6 @@ const ProdutoForm = () => {
             </Box>
         </PageLayout>
     );
-
 };
 
 export default ProdutoForm;

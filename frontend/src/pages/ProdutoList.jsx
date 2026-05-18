@@ -3,6 +3,7 @@ import { FiberNew } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import PageLayout from "../components/common/PageLayout";
 import ActionButtons from "../components/common/ActionButtons";
+import logoImg from "../assets/Dudu3D.jpg";
 
 function ProdutoList() {
     const navigate = useNavigate();
@@ -40,12 +41,11 @@ function ProdutoList() {
                 if (column.field === 'descricao') return (
                 <TableCell key={index}>
                     <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                        
+                        {produto.descricao}
                     </Typography>
                 </TableCell>
             );
-                if (column.field === 'valor_unitario') return <TableCell key={index} sx={{ fontWeight: 600, color: 'success.main'
-}}>{formatCurrency(produto.valor_unitario)}</TableCell>;
+                if (column.field === 'valor_unitario') return <TableCell key={index} sx={{ fontWeight: 600, color: 'success.main' }}>{formatCurrency(produto.valor_unitario)}</TableCell>;
                 if (column.field === 'actions') return (
                     <TableCell key={index}>
                         <ActionButtons onView={handleView} onEdit={handleEdit} onDelete={handleDelete} item={produto} />
@@ -104,9 +104,20 @@ function ProdutoList() {
         </Card>
     );
 
-    // Renderizar a tabela em desktop e os cards em mobile
     return (
-        <PageLayout title="Produtos" actions={actions}>
+        <PageLayout 
+            title={
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <img 
+                        src={logoImg} 
+                        alt="Logo" 
+                        style={{ width: '50px', height: '50px', borderRadius: '50px', objectFit: 'cover', border: '2px solid #fff' }} 
+                    />
+                    <span>Produtos</span>
+                </Box>
+            } 
+            actions={actions}
+        >
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                 <TableContainer component={Paper}>
                     <Table>

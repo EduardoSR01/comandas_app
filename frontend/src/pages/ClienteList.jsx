@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 
 import PageLayout from "../components/common/PageLayout";
 import ActionButtons from "../components/common/ActionButtons";
+import logoImg from "../assets/Dudu3D.jpg";
 
 function ClienteList() {
 
@@ -179,7 +180,19 @@ function ClienteList() {
     );
 
     return (
-        <PageLayout title="Clientes" actions={actions}>
+        <PageLayout 
+            title={
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <img 
+                        src={logoImg} 
+                        alt="Logo" 
+                        style={{ width: '50px', height: '50px', borderRadius: '50px', objectFit: 'cover', border: '2px solid #fff' }} 
+                    />
+                    <span>Clientes</span>
+                </Box>
+            } 
+            actions={actions}
+        >
 
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
 
