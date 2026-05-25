@@ -11,7 +11,8 @@ import {
     CardContent,
     Typography,
     Box,
-    Divider
+    Divider,
+    Chip
 } from '@mui/material';
 
 import { FiberNew } from '@mui/icons-material';
@@ -21,25 +22,29 @@ import PageLayout from "../components/common/PageLayout";
 import ActionButtons from "../components/common/ActionButtons";
 import logoImg from "../assets/Dudu3D.jpg";
 
+import { getGrupoInfo } from '../constants/userGroups';
+import { useMasks } from '../hooks/useMasks';
+
 function FuncionarioList() {
 
     const navigate = useNavigate();
+    const { applyCpfMask, applyPhoneMask } = useMasks();
 
     const funcionarios = [
         {
             id: 1,
             nome: 'Eduardo da Silva Ramos',
             matricula: '2025007',
-            cpf: '115.136.198-10',
-            telefone: '(47) 99947-5649',
+            cpf: '11513619810',
+            telefone: '47999475649',
             grupo: 1
         },
         {
             id: 2,
             nome: 'Gabriela Koch',
             matricula: '2025002',
-            cpf: '286.261.227-92',
-            telefone: '(49) 98866-8458',
+            cpf: '28626122792',
+            telefone: '49988668458',
             grupo: 2
         }
     ];
@@ -66,10 +71,6 @@ function FuncionarioList() {
 
     const handleDelete = (funcionario) => {
         console.log("Excluir funcionário:", funcionario);
-    };
-
-    const getGrupo = (grupo) => {
-        return grupo === 1 ? "Administrador" : "Funcionário";
     };
 
     const columns = [
@@ -107,15 +108,15 @@ function FuncionarioList() {
             </TableCell>
 
             <TableCell>
-                {funcionario.cpf}
+                {applyCpfMask(funcionario.cpf)}
             </TableCell>
 
             <TableCell>
-                {funcionario.telefone}
+                {applyPhoneMask(funcionario.telefone)}
             </TableCell>
 
             <TableCell>
-                {getGrupo(funcionario.grupo)}
+                <Chip label={getGrupoInfo(funcionario.grupo).label} color={getGrupoInfo(funcionario.grupo).color} size="small" />
             </TableCell>
 
             <TableCell>
@@ -172,15 +173,15 @@ function FuncionarioList() {
                     </Typography>
 
                     <Typography variant="body2">
-                        <strong>CPF:</strong> {funcionario.cpf}
+                        <strong>CPF:</strong> {applyCpfMask(funcionario.cpf)}
                     </Typography>
 
                     <Typography variant="body2">
-                        <strong>Telefone:</strong> {funcionario.telefone}
+                        <strong>Telefone:</strong> {applyPhoneMask(funcionario.telefone)}
                     </Typography>
 
-                    <Typography variant="body2">
-                        <strong>Grupo:</strong> {getGrupo(funcionario.grupo)}
+                    <Typography variant="body2" sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 0.5 }}>
+                        <strong>Grupo:</strong> <Chip label={getGrupoInfo(funcionario.grupo).label} color={getGrupoInfo(funcionario.grupo).color} size="small" />
                     </Typography>
 
                 </Box>

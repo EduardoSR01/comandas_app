@@ -16,6 +16,7 @@ const ProdutoList = lazy(() => import("../pages/ProdutoList"));
 const ProdutoForm = lazy(() => import("../pages/ProdutoForm"));
 const LoginForm = lazy(() => import("../components/forms/LoginForm"));
 const NotFound = lazy(() => import("../pages/NotFound"));
+const ProdutoListPublic = lazy(() => import("../pages/ProdutoListPublic"));
 
 // Loader para o Suspense - melhora a experiência do usuário em aplicações maiores.
 // Sempre que uma rota for acessada, o Suspense exibirá o fallback (Carregando...) até que o componente da rota seja carregado.
@@ -34,19 +35,22 @@ const AppRoutes = () => {
 
                 {/* Rotas públicas - sem necessidade de autenticação */}
                 <Route path="/produtos/publica" element={<ProdutoList />} />
+                <Route path="/produtos/publica" element={<ProdutoListPublic />} />
 
                 {/* Rotas restritas - somente se não estiver logado */}
                 <Route path="/login" element={<RestrictedRoute><LoginForm /></RestrictedRoute>} />
 
                 {/* Rotas protegidas - somente se estiver logado */}
                 <Route path="/home" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-
                 <Route path="/produtos" element={<PrivateRoute><ProdutoList /></PrivateRoute>} />
                 <Route path="/produto" element={<PrivateRoute><ProdutoForm /></PrivateRoute>} />
                 <Route path="/funcionarios" element={<PrivateRoute><FuncionarioList /></PrivateRoute>} />
                 <Route path="/funcionario" element={<PrivateRoute><FuncionarioForm /></PrivateRoute>} />
                 <Route path="/clientes" element={<PrivateRoute><ClienteList /></PrivateRoute>} />
                 <Route path="/cliente" element={<PrivateRoute><ClienteForm /></PrivateRoute>} />
+
+                {/* Rota para editar ou visualizar com opr {view ou edit} e id dinâmico */}
+                <Route path="/produto/:opr/:id" element={<PrivateRoute><ProdutoForm /></PrivateRoute>} />
 
                 {/* Rota para páginas não encontradas */}
                 <Route path="*" element={<NotFound />} />
